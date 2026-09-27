@@ -1,0 +1,6 @@
+{
+  "name": "DevERP — Freelance Developer ERP",
+  "description": "Offline-capable developer ERP to manage freelance clients, projects, milestones, multi-currency cash flow ledger, and PDF invoicing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
