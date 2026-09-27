@@ -6,3 +6,9 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Database Backups & Export files
+*.backup.json
+*backup*.json
+deverp-backup-*.json
+

@@ -102,11 +102,25 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (parsed.developerName === 'Tarek El-Masry' || !parsed.developerPhone || parsed.developerEmail === 'tarek.dev@systems.io') {
-          return {
+        if (
+          parsed.developerEmail?.includes('outlook.com') ||
+          parsed.developerEmail?.includes('systems.io') ||
+          parsed.bankName?.includes('Commercial') ||
+          parsed.iban?.includes('EG380010') ||
+          parsed.developerPhone?.includes('1019804919')
+        ) {
+          // Sanitize legacy cached data with neutral placeholders
+          const sanitized = {
             ...parsed,
-            ...INITIAL_DEVELOPER_PROFILE,
+            developerEmail: 'developer@example.com',
+            developerPhone: '+20 100 000 0000',
+            developerTaxId: 'EG-TAX-00000000',
+            bankName: 'Example International Bank',
+            iban: 'EG000000000000000000000000000',
+            swift: 'EXAMPLEGXXX',
           };
+          localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(sanitized));
+          return sanitized;
         }
         return parsed;
       } catch {

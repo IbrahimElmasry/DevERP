@@ -248,28 +248,28 @@ export function exportInvoicePDF(
   doc.text(`Beneficiary Bank:`, margin + 4, y + 12);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(15, 23, 42);
-  doc.text(invoice.paymentDetails.bankName || profile?.bankName || 'N/A', margin + 35, y + 12);
+  doc.text(invoice.paymentDetails.bankName || profile?.bankName || 'Example International Bank', margin + 35, y + 12);
 
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(71, 85, 105);
   doc.text(`Account Holder:`, margin + 4, y + 17);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(15, 23, 42);
-  doc.text(invoice.paymentDetails.accountHolder || profile?.accountHolder || 'N/A', margin + 35, y + 17);
+  doc.text(invoice.paymentDetails.accountHolder || profile?.accountHolder || 'Ibrahim Tarek', margin + 35, y + 17);
 
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(71, 85, 105);
   doc.text(`IBAN Number:`, margin + 4, y + 22);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(15, 23, 42);
-  doc.text(invoice.paymentDetails.iban || profile?.iban || 'N/A', margin + 35, y + 22);
+  doc.text(invoice.paymentDetails.iban || profile?.iban || 'EG000000000000000000000000000', margin + 35, y + 22);
 
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(71, 85, 105);
   doc.text(`SWIFT / BIC:`, margin + 4, y + 27);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(15, 23, 42);
-  doc.text(invoice.paymentDetails.swift || profile?.swift || 'N/A', margin + 35, y + 27);
+  doc.text(invoice.paymentDetails.swift || profile?.swift || 'EXAMPLEGXXX', margin + 35, y + 27);
 
   // Notes & Footer
   if (invoice.notes) {

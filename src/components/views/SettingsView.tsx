@@ -78,9 +78,32 @@ export const SettingsView: React.FC = () => {
         {savedSuccess && (
           <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-3 py-1.5 rounded-md">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Settings saved successfully</span>
+            <span>Settings saved locally to browser</span>
           </div>
         )}
+      </div>
+
+      {/* Local-First Security & Setup Notice */}
+      <div className="bg-slate-900/60 border border-slate-800 rounded-lg p-4 flex items-start gap-3 text-xs">
+        <div className="p-2 bg-emerald-950/40 text-emerald-400 rounded border border-emerald-800/40 shrink-0 mt-0.5">
+          <Database className="w-4 h-4" />
+        </div>
+        <div className="space-y-1">
+          <div className="font-semibold text-white flex items-center gap-2">
+            <span>First-Run Business Setup & Local Privacy</span>
+            <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-800/40">
+              100% Client-Side
+            </span>
+          </div>
+          <p className="text-slate-400 leading-relaxed">
+            All personal identity, tax registration, and banking credentials entered here are stored exclusively in your browser's private local storage. They are never sent to external servers or baked into git-tracked code repositories.
+          </p>
+          {(formData.iban === 'EG000000000000000000000000000' || formData.developerEmail === 'developer@example.com') && (
+            <div className="text-amber-400/90 font-mono text-[11px] pt-1">
+              Notice: Standard neutral placeholders currently active. Enter your real business details below to customize generated invoices and PDFs.
+            </div>
+          )}
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -99,6 +122,7 @@ export const SettingsView: React.FC = () => {
                 required
                 value={formData.developerName}
                 onChange={(e) => setFormData({ ...formData, developerName: e.target.value })}
+                placeholder="e.g. Ibrahim Tarek"
                 className="w-full bg-slate-900 border border-slate-700/80 rounded-md px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
               />
             </div>
@@ -109,6 +133,7 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={formData.developerTitle}
                 onChange={(e) => setFormData({ ...formData, developerTitle: e.target.value })}
+                placeholder="e.g. Software Engineer & Consultant"
                 className="w-full bg-slate-900 border border-slate-700/80 rounded-md px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
               />
             </div>
@@ -185,6 +210,7 @@ export const SettingsView: React.FC = () => {
                 required
                 value={formData.bankName}
                 onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
+                placeholder="e.g. Example International Bank"
                 className="w-full bg-slate-900 border border-slate-700/80 rounded-md px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
               />
             </div>
@@ -196,6 +222,7 @@ export const SettingsView: React.FC = () => {
                 required
                 value={formData.accountHolder}
                 onChange={(e) => setFormData({ ...formData, accountHolder: e.target.value })}
+                placeholder="e.g. Ibrahim Tarek"
                 className="w-full bg-slate-900 border border-slate-700/80 rounded-md px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
               />
             </div>
@@ -209,6 +236,7 @@ export const SettingsView: React.FC = () => {
                 required
                 value={formData.iban}
                 onChange={(e) => setFormData({ ...formData, iban: e.target.value })}
+                placeholder="e.g. EG000000000000000000000000000"
                 className="w-full bg-slate-900 border border-slate-700/80 rounded-md px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-500"
               />
             </div>
@@ -220,6 +248,7 @@ export const SettingsView: React.FC = () => {
                 required
                 value={formData.swift}
                 onChange={(e) => setFormData({ ...formData, swift: e.target.value })}
+                placeholder="e.g. EXAMPLEGXXX"
                 className="w-full bg-slate-900 border border-slate-700/80 rounded-md px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-500"
               />
             </div>

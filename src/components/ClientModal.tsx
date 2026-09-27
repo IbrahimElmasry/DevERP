@@ -90,7 +90,7 @@ export const ClientModal: React.FC<ClientModalProps> = ({
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="finance@apexcloud.io"
+                placeholder="client@example.com"
                 className="w-full bg-slate-900 border border-slate-700/80 rounded-md px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
               />
             </div>
@@ -129,7 +129,7 @@ export const ClientModal: React.FC<ClientModalProps> = ({
                 type="text"
                 value={taxId}
                 onChange={(e) => setTaxId(e.target.value)}
-                placeholder="e.g. US-EIN-94-2819034"
+                placeholder="e.g. US-EIN-00-0000000"
                 className="w-full bg-slate-900 border border-slate-700/80 rounded-md px-3 py-2 text-sm text-white font-mono placeholder-slate-500 focus:outline-none focus:border-emerald-500"
               />
             </div>
