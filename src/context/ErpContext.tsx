@@ -102,27 +102,14 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (
-          parsed.developerEmail?.includes('outlook.com') ||
-          parsed.developerEmail?.includes('systems.io') ||
-          parsed.bankName?.includes('Commercial') ||
-          parsed.iban?.includes('EG380010') ||
-          parsed.developerPhone?.includes('1019804919')
-        ) {
-          // Sanitize legacy cached data with neutral placeholders
-          const sanitized = {
-            ...parsed,
-            developerEmail: 'developer@example.com',
-            developerPhone: '+20 100 000 0000',
-            developerTaxId: 'EG-TAX-00000000',
-            bankName: 'Example International Bank',
-            iban: 'EG000000000000000000000000000',
-            swift: 'EXAMPLEGXXX',
-          };
-          localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(sanitized));
-          return sanitized;
-        }
-        return parsed;
+        return {
+          ...INITIAL_DEVELOPER_PROFILE,
+          ...parsed,
+          exchangeRates: {
+            ...INITIAL_DEVELOPER_PROFILE.exchangeRates,
+            ...(parsed.exchangeRates || {}),
+          },
+        };
       } catch {
         return INITIAL_DEVELOPER_PROFILE;
       }
@@ -358,7 +345,21 @@ export const ErpProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const updateProfile = (data: Partial<DeveloperProfile>) => {
-    setProfile((prev) => ({ ...prev, ...data }));
+    setProfile((prev) => {
+      const updated: DeveloperProfile = {
+        ...prev,
+        ...data,
+        exchangeRates: data.exchangeRates
+          ? { ...prev.exchangeRates, ...data.exchangeRates }
+          : prev.exchangeRates,
+      };
+      try {
+        localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(updated));
+      } catch (err) {
+        console.error('Failed to save profile to localStorage:', err);
+      }
+      return updated;
+    });
   };
 
   const resetToSampleData = () => {
